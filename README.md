@@ -1,1 +1,1 @@
-# ConUHacks
+# ConUHacks VIII project
