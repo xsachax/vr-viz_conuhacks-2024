@@ -672,8 +672,6 @@ namespace Autohand {
                     body.position = new Vector3(body.position.x, newClosestHit.point.y, body.position.z);
                     transform.position = body.position;
                 }
-
-                body.useGravity = !isGrounded;
             }
         }
 
@@ -683,7 +681,6 @@ namespace Autohand {
 
         public void ToggleFlying() {
             useGrounding = !useGrounding;
-            body.useGravity = useGrounding;
         }
 
         protected virtual void UpdatePlayerHeight() {
@@ -748,11 +745,6 @@ namespace Autohand {
 
 
         public void Jump(float jumpPower = 1) {
-            if(isGrounded) {
-                DisableGrounding(0.1f);
-                body.useGravity = true;
-                body.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
-            }
         }
 
 

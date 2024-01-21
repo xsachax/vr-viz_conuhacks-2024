@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7151538578408796582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1503046772061971665}
+  - component: {fileID: 8707756457853974304}
+  m_Layer: 0
+  m_Name: CarCrash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1503046772061971665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7151538578408796582}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.023588236, y: 0.00000006506619, z: 0.000002757633, w: 0.99972177}
+  m_LocalPosition: {x: -34.4, y: -177.60773, z: 0.000017570797}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8707756457853974304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7151538578408796582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f14e1eb550b9a4fb6c0a2f0456845b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _adjustOrientationForGlobeWhenMoving: 1
+  _detectTransformChanges: 1
+  _localToGlobeFixedMatrix:
+    c0:
+      x: 0.959608936715955
+      y: 0.28133732166100733
+      z: 0.000003935081692210957
+      w: 0
+    c1:
+      x: 0.18749368487194115
+      y: -0.6395296163595314
+      z: 0.7455521363136833
+      w: 0
+    c2:
+      x: -0.20975415779042217
+      y: 0.7154377549913147
+      z: 0.6664473062833574
+      w: 0
+    c3:
+      x: 1259776.8204646343
+      y: -4297013.187282422
+      z: 4526731.532246222
+      w: 1
+  _localToGlobeFixedMatrixIsValid: 1
