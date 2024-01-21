@@ -30,7 +30,7 @@ public class Management : MonoBehaviour
     
     void GenerateDataPoints()
     {
-        using (var reader = new StreamReader("Assets/Data/crimes_good.csv"))
+        using (var reader = new StreamReader("Assets/Data/crashes.csv"))
         {
             reader.ReadLine();
             while (!reader.EndOfStream)
@@ -41,8 +41,12 @@ public class Management : MonoBehaviour
 
                 string[] values = line.Split(',');
                 
-                float lat = float.Parse(values[1]);
-                float lon = float.Parse(values[0]);
+                int year = int.Parse(values[8]);
+                if (year != 2021)
+                    continue;
+                
+                float lat = float.Parse(values[12]);
+                float lon = float.Parse(values[11]);
                 Debug.Log(lat + " " + lon);
                 var instance = Instantiate(crimePrefab, parent.transform);
                 instance.GetComponent<CesiumGlobeAnchor>().latitude = lat;
@@ -50,7 +54,7 @@ public class Management : MonoBehaviour
             }
         }
         
-        using (var reader = new StreamReader("Assets/Data/declarations_punaises_de_lit.csv"))
+        using (var reader = new StreamReader("Assets/Data/comptages_vehicules_cyclistes_pietons.csv"))
         {
             reader.ReadLine();
             while (!reader.EndOfStream)
@@ -61,12 +65,10 @@ public class Management : MonoBehaviour
 
                 string[] values = line.Split(',');
 
-                //int year = int.Parse(values[8]);
-                //if (year != 2021)
-                //    continue;
+                
 
-                float lat = float.Parse(values[2]);
-                float lon = float.Parse(values[1]);
+                float lat = float.Parse(values[6]);
+                float lon = float.Parse(values[5]);
                 Debug.Log(lat + " " + lon);
                 var instance = Instantiate(coyotePrefab, parent.transform);
                 instance.GetComponent<CesiumGlobeAnchor>().latitude = lat;
