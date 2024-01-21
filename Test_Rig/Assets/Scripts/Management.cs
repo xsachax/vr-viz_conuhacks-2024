@@ -25,9 +25,9 @@ public class Management : MonoBehaviour
     {
         using (var reader = new StreamReader("Assets/Data/data.csv"))
         {
-            //int numOfPoints = 30000;
+            int numOfPoints = 3000;
             int count = 0;
-            while (!reader.EndOfStream)
+            while (numOfPoints > 0) // (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
                 string[] values = line.Split(',');
@@ -40,7 +40,7 @@ public class Management : MonoBehaviour
                 instance.GetComponent<CesiumGlobeAnchor>().latitude = lat;
                 instance.GetComponent<CesiumGlobeAnchor>().longitude = lon;
                 
-                //numOfPoints--;
+                numOfPoints--;
             }
             Debug.Log(count);
         }
