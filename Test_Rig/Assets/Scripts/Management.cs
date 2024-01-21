@@ -14,12 +14,10 @@ public class Management : MonoBehaviour
      * JR_SEMN_ACCDN,DT_ACCDN,CD_MUNCP,NB_VEH_IMPLIQUES_ACCDN,NB_MORTS,NB_BLESSES_GRAVES,NB_BLESSES_LEGERS,HEURE_ACCDN,AN,NB_VICTIMES_TOTAL,GRAVITE,LOC_LONG,LOC_LAT
      */
 
-    [SerializeField] private GameObject prefab;
+    [SerializeField] private GameObject coyotePrefab;
+    [SerializeField] private GameObject crimePrefab;
     [SerializeField] private GameObject parent;
-    [SerializeField] private Material deathMat;
-    [SerializeField] private Material injuryMat;
-    [SerializeField] private Material fineMat;
-    [SerializeField] private Slider yearSlider;
+    //[SerializeField] private Slider yearSlider;
 
     private int chosenYear = 2021;
     
@@ -29,55 +27,61 @@ public class Management : MonoBehaviour
     {
         this.GenerateDataPoints();
     }
-
+    
     void GenerateDataPoints()
     {
-        using (var reader = new StreamReader("Assets/Data/data.csv"))
+        using (var reader = new StreamReader("Assets/Data/comptages_vehicules_cyclistes_pietons.csv"))
         {
-            //int numOfPoints = 3000;
-            Material currentPointType; // 0 = death, 1 = injury, 2 = fine
-            while (!reader.EndOfStream) //(numOfPoints > 0)
+            reader.ReadLine();
+            while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
                 if (line == null)
                     break;
+
+                string[] values = line.Split(',');
                 
+                float lat = float.Parse(values[6]);
+                float lon = float.Parse(values[5]);
+                Debug.Log(lat + " " + lon);
+                var instance = Instantiate(coyotePrefab, parent.transform);
+                instance.GetComponent<CesiumGlobeAnchor>().latitude = lat;
+                instance.GetComponent<CesiumGlobeAnchor>().longitude = lon;
+            }
+        }
+        
+        using (var reader = new StreamReader("Assets/Data/collisions_loc (3).csv"))
+        {
+            reader.ReadLine();
+            while (!reader.EndOfStream)
+            {
+                var line = reader.ReadLine();
+                if (line == null)
+                    break;
+
                 string[] values = line.Split(',');
 
                 int year = int.Parse(values[8]);
-                if (year != this.chosenYear)
+                if (year != 2021)
                     continue;
 
-                int deaths = int.Parse(values[4]);
-                int injuries = int.Parse(values[5]);
-                if (deaths > 0)
-                    currentPointType = this.deathMat;
-                else if (injuries > 0)
-                    currentPointType = this.injuryMat;
-                else
-                    currentPointType = this.fineMat;
-
-                prefab.GetComponent<MeshRenderer>().material = currentPointType;
-                
                 float lat = float.Parse(values[12]);
                 float lon = float.Parse(values[11]);
                 Debug.Log(lat + " " + lon);
-                var instance = Instantiate(prefab, parent.transform);
+                var instance = Instantiate(crimePrefab, parent.transform);
                 instance.GetComponent<CesiumGlobeAnchor>().latitude = lat;
                 instance.GetComponent<CesiumGlobeAnchor>().longitude = lon;
-                
-                //numOfPoints--;
             }
         }
     }
     
-    void DestroyDataPoints()
-    {
-        foreach (Transform child in parent.transform)
-        {
-            Destroy(child.gameObject);
-        }
-    }
+    //void DestroyDataPoints()
+    //{
+    //    foreach (Transform child in parent.transform)
+    //    {
+    //        Destroy(child.gameObject);
+    //    }
+    //}
 
     // Update is called once per frame
     void Update()
@@ -85,7 +89,7 @@ public class Management : MonoBehaviour
         
     }
     
-    public void OnSliderChange()
+    /*public void OnSliderChange()
     {
         
     }
@@ -96,5 +100,5 @@ public class Management : MonoBehaviour
         this.chosenYear = (int) this.yearSlider.value;
         this.DestroyDataPoints();
         this.GenerateDataPoints();
-    }
+    }*/
 }

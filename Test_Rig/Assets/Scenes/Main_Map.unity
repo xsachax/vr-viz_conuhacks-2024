@@ -1659,7 +1659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_System: {fileID: 582595183}
-  m_MoveSpeed: 50
+  m_MoveSpeed: 1000
   m_EnableStrafe: 1
   m_EnableFly: 1
   m_UseGravity: 0
@@ -1786,12 +1786,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823323b254fd2ae44852a183ea5a3c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2762716678636863795, guid: 3259ff695364a1045857b737188740b6, type: 3}
+  coyotePrefab: {fileID: 3865835399002081547, guid: 5f8c0d4fb80ecb149a5a2011cdc6b23d,
+    type: 3}
+  crimePrefab: {fileID: 2762716678636863795, guid: 3259ff695364a1045857b737188740b6,
+    type: 3}
   parent: {fileID: 913500684}
-  deathMat: {fileID: 2100000, guid: b40e5b548603509439716ea8ae62f126, type: 2}
-  injuryMat: {fileID: 2100000, guid: 135bba167d566d34d9cde741135dc27f, type: 2}
-  fineMat: {fileID: 2100000, guid: ba71aa4c83f524b47a02e9ec11a9d894, type: 2}
-  yearSlider: {fileID: 41905961}
 --- !u!4 &592858182
 Transform:
   m_ObjectHideFlags: 0
