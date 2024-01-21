@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3012673605049591428}
   - component: {fileID: 739740821501125945}
   - component: {fileID: 5450752617007411286}
-  - component: {fileID: 2098059687511488348}
   - component: {fileID: 1967403420146339459}
   m_Layer: 0
   m_Name: PTSD
@@ -29,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2762716678636863795}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -66.77665, y: -176.8291, z: 3.9025068}
+  m_LocalPosition: {x: 0, y: -10000, z: 0}
   m_LocalScale: {x: 80.297905, y: 2758.6057, z: 54.027252}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -85,27 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2098059687511488348
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2762716678636863795}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1967403420146339459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,8 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74f14e1eb550b9a4fb6c0a2f0456845b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _adjustOrientationForGlobeWhenMoving: 1
-  _detectTransformChanges: 1
+  _adjustOrientationForGlobeWhenMoving: 0
+  _detectTransformChanges: 0
   _localToGlobeFixedMatrix:
     c0:
       x: 77.05466534103148
