@@ -2,47 +2,80 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using CesiumForUnity;
 
 public class Management : MonoBehaviour
 {
     
     /**
-     * CSV content:
-     * lon,lat
+     * CSV header:
+     * JR_SEMN_ACCDN,DT_ACCDN,CD_MUNCP,NB_VEH_IMPLIQUES_ACCDN,NB_MORTS,NB_BLESSES_GRAVES,NB_BLESSES_LEGERS,HEURE_ACCDN,AN,NB_VICTIMES_TOTAL,GRAVITE,LOC_LONG,LOC_LAT
      */
 
     [SerializeField] private GameObject prefab;
     [SerializeField] private GameObject parent;
+    [SerializeField] private Material deathMat;
+    [SerializeField] private Material injuryMat;
+    [SerializeField] private Material fineMat;
+    [SerializeField] private Slider yearSlider;
+
+    private int chosenYear = 2021;
     
-    void Awake()
-    {
-        
-    }
     
     // Start is called before the first frame update
     void Start()
     {
+        this.GenerateDataPoints();
+    }
+
+    void GenerateDataPoints()
+    {
         using (var reader = new StreamReader("Assets/Data/data.csv"))
         {
-            int numOfPoints = 3000;
-            int count = 0;
-            while (numOfPoints > 0) // (!reader.EndOfStream)
+            //int numOfPoints = 3000;
+            Material currentPointType; // 0 = death, 1 = injury, 2 = fine
+            while (!reader.EndOfStream) //(numOfPoints > 0)
             {
                 var line = reader.ReadLine();
-                string[] values = line.Split(',');
+                if (line == null)
+                    break;
                 
-                float lat = float.Parse(values[0]);
-                float lon = float.Parse(values[1]);
-                Debug.Log(lon + " " + lat);
-                count++;
-                var instance = Instantiate(prefab , parent.transform);
+                string[] values = line.Split(',');
+
+                int year = int.Parse(values[8]);
+                if (year != this.chosenYear)
+                    continue;
+
+                int deaths = int.Parse(values[4]);
+                int injuries = int.Parse(values[5]);
+                if (deaths > 0)
+                    currentPointType = this.deathMat;
+                else if (injuries > 0)
+                    currentPointType = this.injuryMat;
+                else
+                    currentPointType = this.fineMat;
+
+                prefab.GetComponent<MeshRenderer>().material = currentPointType;
+                
+                float lat = float.Parse(values[12]);
+                float lon = float.Parse(values[11]);
+                Debug.Log(lat + " " + lon);
+                var instance = Instantiate(prefab, parent.transform);
                 instance.GetComponent<CesiumGlobeAnchor>().latitude = lat;
                 instance.GetComponent<CesiumGlobeAnchor>().longitude = lon;
                 
-                numOfPoints--;
+                //numOfPoints--;
             }
-            Debug.Log(count);
+        }
+    }
+    
+    void DestroyDataPoints()
+    {
+        foreach (Transform child in parent.transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 
@@ -50,5 +83,18 @@ public class Management : MonoBehaviour
     void Update()
     {
         
+    }
+    
+    public void OnSliderChange()
+    {
+        
+    }
+    
+    public void OnConfirm()
+    {
+        Debug.Log("Confirm");
+        this.chosenYear = (int) this.yearSlider.value;
+        this.DestroyDataPoints();
+        this.GenerateDataPoints();
     }
 }
