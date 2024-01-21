@@ -30,7 +30,7 @@ public class Management : MonoBehaviour
     
     void GenerateDataPoints()
     {
-        using (var reader = new StreamReader("Assets/Data/comptages_vehicules_cyclistes_pietons.csv"))
+        using (var reader = new StreamReader("Assets/Data/crimes_good.csv"))
         {
             reader.ReadLine();
             while (!reader.EndOfStream)
@@ -41,16 +41,16 @@ public class Management : MonoBehaviour
 
                 string[] values = line.Split(',');
                 
-                float lat = float.Parse(values[6]);
-                float lon = float.Parse(values[5]);
+                float lat = float.Parse(values[1]);
+                float lon = float.Parse(values[0]);
                 Debug.Log(lat + " " + lon);
-                var instance = Instantiate(coyotePrefab, parent.transform);
+                var instance = Instantiate(crimePrefab, parent.transform);
                 instance.GetComponent<CesiumGlobeAnchor>().latitude = lat;
                 instance.GetComponent<CesiumGlobeAnchor>().longitude = lon;
             }
         }
         
-        using (var reader = new StreamReader("Assets/Data/collisions_loc (3).csv"))
+        using (var reader = new StreamReader("Assets/Data/declarations_punaises_de_lit.csv"))
         {
             reader.ReadLine();
             while (!reader.EndOfStream)
@@ -61,44 +61,23 @@ public class Management : MonoBehaviour
 
                 string[] values = line.Split(',');
 
-                int year = int.Parse(values[8]);
-                if (year != 2021)
-                    continue;
+                //int year = int.Parse(values[8]);
+                //if (year != 2021)
+                //    continue;
 
-                float lat = float.Parse(values[12]);
-                float lon = float.Parse(values[11]);
+                float lat = float.Parse(values[2]);
+                float lon = float.Parse(values[1]);
                 Debug.Log(lat + " " + lon);
-                var instance = Instantiate(crimePrefab, parent.transform);
+                var instance = Instantiate(coyotePrefab, parent.transform);
                 instance.GetComponent<CesiumGlobeAnchor>().latitude = lat;
                 instance.GetComponent<CesiumGlobeAnchor>().longitude = lon;
             }
         }
     }
     
-    //void DestroyDataPoints()
-    //{
-    //    foreach (Transform child in parent.transform)
-    //    {
-    //        Destroy(child.gameObject);
-    //    }
-    //}
-
     // Update is called once per frame
     void Update()
     {
         
     }
-    
-    /*public void OnSliderChange()
-    {
-        
-    }
-    
-    public void OnConfirm()
-    {
-        Debug.Log("Confirm");
-        this.chosenYear = (int) this.yearSlider.value;
-        this.DestroyDataPoints();
-        this.GenerateDataPoints();
-    }*/
 }
