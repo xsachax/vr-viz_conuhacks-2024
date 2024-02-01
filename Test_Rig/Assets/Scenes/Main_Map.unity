@@ -4808,7 +4808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _showCreditsOnScreen: 1
   _tilesetSource: 1
-  _url: https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyAFXGT_oWvh9T-4PjnBGw9IwWDYJLD5gfg
+  _url: https://tile.googleapis.com/v1/3dtiles/root.json?key=
   _ionAssetID: 0
   _ionAccessToken: 
   _ionServer: {fileID: 11400000, guid: 1d3712490eb49fe48b802c2f4f964fd3, type: 2}
